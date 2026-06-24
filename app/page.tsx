@@ -7,7 +7,8 @@ const languages = [
   { code: "en", label: "English" },
   { code: "sw", label: "Kiswahili" },
   { code: "bem", label: "Bemba" },
-  { code: "fr", label: "Français" },
+  { code: "fr", label: "French" },
+  { code: "de", label: "Bambara" }
 ];
 
 export default function Welcome() {
