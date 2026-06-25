@@ -1,0 +1,321 @@
+{
+    "$schema_note": "Seed data for Bloom MVP. All entries reference real organisations. URLs point to verified main homepages only — program-specific deep links should be added by the data team after verification.",
+    "opportunities": [
+        {
+            "id": "camfed-general",
+            "name": "Camfed",
+            "kind": "ngo",
+            "category": "teaching",
+            "region": "general",
+            "description": "Campaign for Female Education — supports girls and young women in Sub-Saharan Africa to learn, lead, and earn.",
+            "url": "https://camfed.org",
+            "notes": "Operates in Ghana, Malawi, Tanzania, Zambia, Zimbabwe. Confirm country-specific application links."
+        },
+        {
+            "id": "camfed-zambia",
+            "name": "Camfed Zambia",
+            "kind": "ngo",
+            "category": "business",
+            "region": "zambia",
+            "description": "Mentorship, entrepreneurship grants, and post-school transition support for young women in Zambia.",
+            "url": "https://camfed.org",
+            "notes": "Find country page from main site."
+        },
+        {
+            "id": "tech-needs-girls",
+            "name": "Tech Needs Girls (Soronko Academy)",
+            "kind": "training",
+            "category": "technology",
+            "region": "ghana",
+            "description": "Mentors and trains girls and young women in coding and digital skills across Ghana.",
+            "url": "https://soronkoacademy.com",
+            "notes": "Soronko Academy runs the Tech Needs Girls programme."
+        },
+        {
+            "id": "she-code-africa",
+            "name": "She Code Africa",
+            "kind": "training",
+            "category": "technology",
+            "region": "general",
+            "description": "Free online and community-based programmes that help African women break into tech careers.",
+            "url": "https://shecodeafrica.org"
+        },
+        {
+            "id": "akilah-davis",
+            "name": "Davis College (formerly Akilah Institute)",
+            "kind": "training",
+            "category": "business",
+            "region": "general",
+            "description": "Career-focused degrees for women in East Africa across business, IT, and entrepreneurship.",
+            "url": "https://davis-college.com",
+            "notes": "Akilah merged into Davis College — verify Rwanda campus admissions URL."
+        },
+        {
+            "id": "kiva",
+            "name": "Kiva",
+            "kind": "microenterprise",
+            "category": "business",
+            "region": "general",
+            "description": "Crowdfunded microloans to start or grow a small business, including farming, trading, and food enterprises.",
+            "url": "https://www.kiva.org"
+        },
+        {
+            "id": "agra",
+            "name": "AGRA",
+            "kind": "ngo",
+            "category": "farming",
+            "region": "general",
+            "description": "Alliance for a Green Revolution in Africa — supports smallholder farmers, many of them women, across 11 countries.",
+            "url": "https://agra.org"
+        },
+        {
+            "id": "heifer-zambia",
+            "name": "Heifer International Zambia",
+            "kind": "ngo",
+            "category": "farming",
+            "region": "zambia",
+            "description": "Trains rural women in livestock, dairy, and crop production to build sustainable family incomes.",
+            "url": "https://www.heifer.org",
+            "notes": "Use main site's country selector to reach Zambia programmes."
+        },
+        {
+            "id": "one-acre-fund",
+            "name": "One Acre Fund",
+            "kind": "training",
+            "category": "farming",
+            "region": "kenya",
+            "description": "Provides smallholder farmers with seed, training, and financing to grow more food and earn more income.",
+            "url": "https://oneacrefund.org",
+            "notes": "Active in Kenya, Rwanda, Tanzania, Uganda, Malawi, Burundi, Zambia."
+        },
+        {
+            "id": "award-fellowships",
+            "name": "AWARD Fellowships",
+            "kind": "training",
+            "category": "farming",
+            "region": "general",
+            "description": "Career development fellowships for African women working in agricultural research and food systems.",
+            "url": "https://awardfellowships.org"
+        },
+        {
+            "id": "un-women-africa",
+            "name": "UN Women Africa",
+            "kind": "ngo",
+            "category": "business",
+            "region": "general",
+            "description": "Women's economic empowerment programmes, grants, and partnerships across the continent.",
+            "url": "https://africa.unwomen.org"
+        },
+        {
+            "id": "vital-voices",
+            "name": "Vital Voices",
+            "kind": "training",
+            "category": "business",
+            "region": "general",
+            "description": "Global network supporting women leaders and entrepreneurs with training and grant funding.",
+            "url": "https://www.vitalvoices.org"
+        },
+        {
+            "id": "andela",
+            "name": "Andela",
+            "kind": "job",
+            "category": "technology",
+            "region": "general",
+            "description": "Connects African technologists to remote engineering jobs at international companies.",
+            "url": "https://www.andela.com"
+        },
+        {
+            "id": "cchub",
+            "name": "Co-creation Hub (CcHUB)",
+            "kind": "training",
+            "category": "technology",
+            "region": "nigeria",
+            "description": "Innovation hub running training, incubation, and women-in-tech programmes across West Africa.",
+            "url": "https://cchub.africa"
+        },
+        {
+            "id": "tunapanda",
+            "name": "Tunapanda Institute",
+            "kind": "training",
+            "category": "technology",
+            "region": "kenya",
+            "description": "Free three-month digital skills bootcamps for young Kenyans, with a focus on underserved communities.",
+            "url": "https://tunapanda.org"
+        },
+        {
+            "id": "ihub-kenya",
+            "name": "iHub",
+            "kind": "training",
+            "category": "technology",
+            "region": "kenya",
+            "description": "Nairobi-based tech community offering training, mentorship, and startup support.",
+            "url": "https://ihub.co.ke"
+        },
+        {
+            "id": "amref-health-africa",
+            "name": "Amref Health Africa",
+            "kind": "training",
+            "category": "healthcare",
+            "region": "general",
+            "description": "Trains community health workers — many of them women — across East and Southern Africa.",
+            "url": "https://amref.org"
+        },
+        {
+            "id": "lwala-kenya",
+            "name": "Lwala Community Alliance",
+            "kind": "training",
+            "category": "healthcare",
+            "region": "kenya",
+            "description": "Community health worker training and maternal-child health programmes in rural Kenya.",
+            "url": "https://lwala.org"
+        },
+        {
+            "id": "pop-council-zambia",
+            "name": "Population Council — Zambia",
+            "kind": "ngo",
+            "category": "healthcare",
+            "region": "zambia",
+            "description": "Adolescent girls' health, education, and economic empowerment research and programmes.",
+            "url": "https://www.popcouncil.org",
+            "notes": "Country-specific landing page should be linked once verified."
+        },
+        {
+            "id": "fawe",
+            "name": "FAWE (Forum for African Women Educationalists)",
+            "kind": "ngo",
+            "category": "teaching",
+            "region": "general",
+            "description": "Promotes girls' and women's education across 33 African countries through bursaries and mentoring.",
+            "url": "https://fawe.org"
+        },
+        {
+            "id": "bridge-international",
+            "name": "Bridge International Academies",
+            "kind": "job",
+            "category": "teaching",
+            "region": "general",
+            "description": "Recruits and trains community teachers across Africa to staff low-cost primary schools.",
+            "url": "https://www.bridgeschools.com",
+            "notes": "Hiring pages vary by country."
+        },
+        {
+            "id": "ethical-fashion-initiative",
+            "name": "Ethical Fashion Initiative (ITC)",
+            "kind": "microenterprise",
+            "category": "sewing",
+            "region": "general",
+            "description": "Connects African artisans and seamstresses to international fashion brands through fair-trade supply chains.",
+            "url": "https://ethicalfashioninitiative.org"
+        },
+        {
+            "id": "afrikrea",
+            "name": "Afrikrea",
+            "kind": "microenterprise",
+            "category": "crafts",
+            "region": "general",
+            "description": "Online marketplace where African artisans sell handmade fashion, crafts, and home goods worldwide.",
+            "url": "https://www.afrikrea.com"
+        },
+        {
+            "id": "kazi-yetu",
+            "name": "Kazi Yetu",
+            "kind": "microenterprise",
+            "category": "cooking",
+            "region": "tanzania",
+            "description": "Tanzanian food company that sources from women smallholder farmers and trains them in value addition.",
+            "url": "https://kaziyetu.co.tz"
+        },
+        {
+            "id": "twaweza-mama-cooks",
+            "name": "Twaweza Africa — Mama Cooks",
+            "kind": "microenterprise",
+            "category": "cooking",
+            "region": "kenya",
+            "description": "Women-led cooperatives in Kenya that turn cooking skills into catering and street-food businesses.",
+            "url": "https://twaweza.org",
+            "notes": "Confirm Mama Cooks programme is current; otherwise replace with closest active programme."
+        },
+        {
+            "id": "village-enterprise",
+            "name": "Village Enterprise",
+            "kind": "training",
+            "category": "business",
+            "region": "general",
+            "description": "Trains rural women in East Africa to start sustainable small businesses with seed-capital grants.",
+            "url": "https://villageenterprise.org"
+        },
+        {
+            "id": "bongo-hive-zambia",
+            "name": "BongoHive",
+            "kind": "training",
+            "category": "technology",
+            "region": "zambia",
+            "description": "Zambia's leading innovation and entrepreneurship hub, with women-focused tech programmes.",
+            "url": "https://bongohive.co.zm"
+        },
+        {
+            "id": "asili-zambia",
+            "name": "Asili Agriculture",
+            "kind": "training",
+            "category": "farming",
+            "region": "zambia",
+            "description": "Sustainable smallholder farming training and market access in Zambia.",
+            "url": "https://asili.com",
+            "notes": "Verify Zambia operations; if inactive, replace with PROFIT+ or similar."
+        },
+        {
+            "id": "mercy-corps-zambia",
+            "name": "Mercy Corps Zambia",
+            "kind": "ngo",
+            "category": "business",
+            "region": "zambia",
+            "description": "Youth and women economic empowerment programmes including agriculture and small business support.",
+            "url": "https://www.mercycorps.org"
+        },
+        {
+            "id": "mercy-corps-general",
+            "name": "Mercy Corps",
+            "kind": "ngo",
+            "category": "healthcare",
+            "region": "general",
+            "description": "Humanitarian and development programmes across Africa, including women's health and livelihoods.",
+            "url": "https://www.mercycorps.org"
+        },
+        {
+            "id": "akirachix",
+            "name": "AkiraChix",
+            "kind": "training",
+            "category": "technology",
+            "region": "kenya",
+            "description": "Year-long, low-cost coding and design programme for young women in Kenya.",
+            "url": "https://akirachix.com"
+        },
+        {
+            "id": "afrishela",
+            "name": "Afrishela",
+            "kind": "microenterprise",
+            "category": "crafts",
+            "region": "kenya",
+            "description": "Empowers Maasai women artisans by selling their handmade jewellery into global markets.",
+            "url": "https://afrishela.com"
+        },
+        {
+            "id": "she-leads-africa",
+            "name": "She Leads Africa",
+            "kind": "training",
+            "category": "business",
+            "region": "general",
+            "description": "Online entrepreneurship community and accelerators for African women.",
+            "url": "https://sheleadsafrica.org"
+        },
+        {
+            "id": "tony-elumelu-foundation",
+            "name": "Tony Elumelu Foundation",
+            "kind": "training",
+            "category": "business",
+            "region": "general",
+            "description": "Annual seed-funding and training programme for 1,000 African entrepreneurs every year.",
+            "url": "https://www.tonyelumelufoundation.org"
+        }
+    ]
+}
