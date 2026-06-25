@@ -1,13 +1,14 @@
 import { NextResponse } from "next/server";
-import { chatWithBloom, type ChatMessage } from "@/lib/claude";
+import { chatWithBloom, type ChatMessage } from "@/src/lib/claude";
 
 type ChatRequestBody = {
   messages: ChatMessage[];
+  lang?: string;
 };
 
 export async function POST(request: Request): Promise<NextResponse> {
   try {
-    const { messages } = (await request.json()) as ChatRequestBody;
+    const { messages, lang } = (await request.json()) as ChatRequestBody;
 
     if (!Array.isArray(messages)) {
       return NextResponse.json(
@@ -16,7 +17,7 @@ export async function POST(request: Request): Promise<NextResponse> {
       );
     }
 
-    const reply = await chatWithBloom(messages);
+    const reply = await chatWithBloom(messages, lang ?? "en");
     return NextResponse.json({ reply });
   } catch (error) {
     const message =

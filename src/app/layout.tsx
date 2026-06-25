@@ -13,8 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Bloom",
-  description: "A calm digital space for reflection, discovery, and steady growth.",
+  title: "Bloom — Discover what you love",
+  description:
+    "A warm, voice-first companion that helps you discover your passion and turn it into a learning path and real opportunities.",
 };
 
 export default function RootLayout({
