@@ -33,7 +33,8 @@ export interface PassionResult {
 
 export type OpportunityKind = "ngo" | "microenterprise" | "job" | "training";
 
-export interface Opportunity {
+/** Curated, hand-verified opportunity stored in data/opportunities.json. */
+export interface CuratedOpportunity {
   id: string;
   name: string;
   kind: OpportunityKind;
@@ -42,6 +43,19 @@ export interface Opportunity {
   description: string;
   url: string; // organisation homepage — verified at curation time
   notes?: string;
+}
+
+/**
+ * A single opportunity surfaced on the results page. Generated for the user's
+ * passion as a diverse mix of types (NGOs, grants, online platforms, etc.).
+ */
+export interface Opportunity {
+  name: string;
+  type: string; // e.g. "MICROENTERPRISE", "NGO", "GRANT", "ONLINE PLATFORM"
+  description: string; // 1–2 warm, concrete sentences
+  matchReason: string; // 1 short sentence (max 18 words) on why it fits this user
+  url: string; // real, working link to a well-known organisation
+  location?: string; // e.g. "Africa-wide", "Global", "Kenya"
 }
 
 export interface LearningTopic {

@@ -1,14 +1,14 @@
 import Link from "next/link";
-import { generateLearningTopics } from "@/src/lib/claude";
-import { findOpportunities } from "@/src/lib/opportunities";
+import {
+  generateLearningTopics,
+  generateOpportunities,
+} from "@/src/lib/claude";
 import { DICT, type LangCode } from "@/src/lib/i18n";
 import {
   PASSION_CATEGORIES,
-  REGIONS,
   type LearningTopic,
   type Opportunity,
   type PassionCategory,
-  type Region,
 } from "@/src/lib/types";
 import { ShareActions } from "./ShareActions";
 
@@ -30,20 +30,6 @@ function asCategory(value: string): PassionCategory | null {
     : null;
 }
 
-function inferRegion(lang: LangCode, explicit: string): Region {
-  if ((REGIONS as readonly string[]).includes(explicit)) {
-    return explicit as Region;
-  }
-  switch (lang) {
-    case "sw":
-      return "kenya";
-    case "bem":
-      return "zambia";
-    default:
-      return "general";
-  }
-}
-
 type PathPageProps = {
   searchParams: Promise<SearchParams>;
 };
@@ -53,8 +39,8 @@ export default async function PathPage({ searchParams }: PathPageProps) {
   const lang = asLang(pickOne(params.lang));
   const passion = pickOne(params.passion);
   const summary = pickOne(params.summary);
+  const transcript = pickOne(params.transcript);
   const category = asCategory(pickOne(params.category));
-  const region = inferRegion(lang, pickOne(params.region));
   const dict = DICT[lang];
 
   if (!passion || !category) {
@@ -76,12 +62,28 @@ export default async function PathPage({ searchParams }: PathPageProps) {
   let topics: LearningTopic[] = [];
   let topicsError: string | null = null;
   try {
-    topics = await generateLearningTopics(passion, category, lang);
+    topics = await generateLearningTopics(
+      passion,
+      category,
+      lang,
+      transcript || undefined
+    );
   } catch (err) {
     topicsError = err instanceof Error ? err.message : "Unknown error";
   }
 
-  const opportunities: Opportunity[] = findOpportunities(category, region, 3);
+  let opportunities: Opportunity[] = [];
+  let opportunitiesError: string | null = null;
+  try {
+    opportunities = await generateOpportunities(
+      passion,
+      category,
+      lang,
+      transcript || undefined
+    );
+  } catch (err) {
+    opportunitiesError = err instanceof Error ? err.message : "Unknown error";
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 via-rose-50 to-amber-50 px-5 py-8 text-zinc-900 sm:px-8">
@@ -129,14 +131,22 @@ export default async function PathPage({ searchParams }: PathPageProps) {
           <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-pink-600">
             {dict.opportunitiesLabel}
           </h2>
-          {opportunities.length === 0 ? (
+          {opportunities.length > 0 ? (
+            <p className="mt-2 text-sm text-zinc-500">
+              {dict.opportunitiesMatched.replace(
+                "{count}",
+                String(opportunities.length)
+              )}
+            </p>
+          ) : null}
+          {opportunitiesError || opportunities.length === 0 ? (
             <p className="mt-4 text-sm leading-6 text-zinc-600">
               {dict.noOpportunities}
             </p>
           ) : (
             <ul className="mt-4 space-y-4">
-              {opportunities.map((opp) => (
-                <li key={opp.id}>
+              {opportunities.map((opp, i) => (
+                <li key={`${opp.name}-${i}`}>
                   <a
                     href={opp.url}
                     target="_blank"
@@ -148,12 +158,22 @@ export default async function PathPage({ searchParams }: PathPageProps) {
                         {opp.name}
                       </h3>
                       <span className="rounded-full bg-pink-100 px-2 py-0.5 text-xs font-medium uppercase tracking-wide text-pink-700">
-                        {opp.kind}
+                        {opp.type}
                       </span>
                     </div>
+                    {opp.location ? (
+                      <p className="mt-1 text-xs font-medium text-zinc-400">
+                        {opp.location}
+                      </p>
+                    ) : null}
                     <p className="mt-2 text-sm leading-6 text-zinc-600">
                       {opp.description}
                     </p>
+                    {opp.matchReason ? (
+                      <p className="mt-2 text-xs italic leading-5 text-[#d6336c]">
+                        ✨ {opp.matchReason}
+                      </p>
+                    ) : null}
                     <span className="mt-2 inline-block text-xs font-medium text-pink-600">
                       {dict.visitSite} →
                     </span>

@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { LANGUAGES, t, type LangCode } from "@/src/lib/i18n";
 import { useLang } from "@/src/lib/use-lang";
-import { tryParsePassionResult } from "@/src/lib/passion-result";
 import type { PassionResult } from "@/src/lib/types";
 import {
     CHAT_STORAGE_KEY,
@@ -58,6 +57,7 @@ export function DiscoverChat() {
     const [messages, setMessages] = useState<Msg[]>([]);
     const [input, setInput] = useState("");
     const [pending, setPending] = useState(false);
+    const [finalizing, setFinalizing] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [listening, setListening] = useState(false);
     const [transcribing, setTranscribing] = useState(false);
@@ -154,7 +154,7 @@ export function DiscoverChat() {
             top: scrollerRef.current.scrollHeight,
             behavior: "smooth",
         });
-    }, [messages, pending]);
+    }, [messages, pending, finalizing]);
 
     // Auto-focus the textarea once mounted.
     useEffect(() => {
@@ -195,7 +195,7 @@ export function DiscoverChat() {
 
     const sendMessage = useCallback(async (text: string) => {
         const trimmed = text.trim();
-        if (!trimmed || pending) return;
+        if (!trimmed || pending || finalizing) return;
         setError(null);
         const next: Msg[] = [...messages, { role: "user", content: trimmed }];
         setMessages(next);
@@ -208,24 +208,46 @@ export function DiscoverChat() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ messages: next, lang }),
             });
-            const data: { reply?: string; error?: string } = await res.json();
-            if (!res.ok || !data.reply) {
+            const data: {
+                reply?: string;
+                isFinal?: boolean;
+                result?: PassionResult;
+                transcript?: string;
+                error?: string;
+            } = await res.json();
+            if (!res.ok) {
                 throw new Error(data.error ?? "Bloom went quiet for a moment.");
             }
 
-            const done: PassionResult | null = tryParsePassionResult(data.reply);
-            if (done) {
+            if (data.isFinal && data.result) {
                 // Conversation complete — clear persisted chat so a fresh
-                // visit starts over cleanly.
+                // visit starts over cleanly. Then show a brief "✨ thinking…"
+                // beat and pause on the reflection screen before results,
+                // carrying the full conversation along.
                 clearBloomChat();
+                setPending(false);
+                setFinalizing(true);
+                try {
+                    sessionStorage.setItem("bloom_messages", JSON.stringify(next));
+                } catch {
+                    // sessionStorage may be unavailable; the reflection screen
+                    // falls back to the warm summary in that case.
+                }
                 const params = new URLSearchParams({
-                    passion: done.passion,
-                    category: done.category,
-                    summary: done.summary,
+                    passion: data.result.passion,
+                    category: data.result.category,
+                    summary: data.result.summary,
                     lang,
                 });
-                router.push(`/path?${params.toString()}`);
+                if (data.transcript) params.set("transcript", data.transcript);
+                setTimeout(() => {
+                    router.push(`/reflection?${params.toString()}`);
+                }, 900);
                 return;
+            }
+
+            if (!data.reply) {
+                throw new Error("Bloom went quiet for a moment.");
             }
 
             setMessages([...next, { role: "assistant", content: data.reply }]);
@@ -493,6 +515,11 @@ export function DiscoverChat() {
                                 </span>
                             </li>
                         ) : null}
+                        {finalizing ? (
+                            <li className="max-w-[85%] self-start rounded-2xl rounded-bl-md bg-white px-4 py-3 text-sm text-zinc-500 shadow-sm">
+                                ✨ {t(lang, "thinking")}
+                            </li>
+                        ) : null}
                     </ul>
                 </div>
 
@@ -512,7 +539,7 @@ export function DiscoverChat() {
                     <button
                         type="button"
                         onClick={toggleMic}
-                        disabled={!voiceSupported || pending || transcribing}
+                        disabled={!voiceSupported || pending || transcribing || finalizing}
                         aria-label={listening ? t(lang, "micStop") : t(lang, "micStart")}
                         className={`relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-xl transition ${listening
                             ? "bg-rose-500 text-white"
@@ -581,7 +608,7 @@ export function DiscoverChat() {
 
                     <button
                         type="submit"
-                        disabled={pending || !input.trim() || listening}
+                        disabled={pending || finalizing || !input.trim() || listening}
                         className="h-12 shrink-0 rounded-full bg-zinc-900 px-5 text-sm font-semibold text-white transition hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50"
                     >
                         {t(lang, "sendBtn")}

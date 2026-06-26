@@ -1,5 +1,10 @@
 import { NextResponse } from "next/server";
-import { chatWithBloom, type ChatMessage } from "@/src/lib/claude";
+import {
+  buildTranscript,
+  getNextBloomQuestion,
+  summarizePassion,
+  type ChatMessage,
+} from "@/src/lib/claude";
 
 type ChatRequestBody = {
   messages: ChatMessage[];
@@ -17,8 +22,21 @@ export async function POST(request: Request): Promise<NextResponse> {
       );
     }
 
-    const reply = await chatWithBloom(messages, lang ?? "en");
-    return NextResponse.json({ reply });
+    const language = lang ?? "en";
+    const next = await getNextBloomQuestion(messages, language);
+
+    if (!next.isFinal) {
+      return NextResponse.json({ reply: next.question, isFinal: false });
+    }
+
+    // Enough has been shared — distill the whole conversation into a passion
+    // and hand the full transcript on so results reflect every answer.
+    const result = await summarizePassion(messages, language);
+    return NextResponse.json({
+      isFinal: true,
+      result,
+      transcript: buildTranscript(messages),
+    });
   } catch (error) {
     const message =
       error instanceof Error ? error.message : "Something went wrong.";
