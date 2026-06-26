@@ -68,10 +68,28 @@ body {
   animation: bloom-pulse 3s ease-in-out infinite;
 }
 
+/* Reflection screen entrance — a gentle breath */
+@keyframes bloom-fade-in {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.animate-bloom-fade-in {
+  animation: bloom-fade-in 600ms ease-out both;
+}
+
 @media (prefers-reduced-motion: reduce) {
 
   .animate-bloom-fall,
-  .animate-bloom-pulse {
+  .animate-bloom-pulse,
+  .animate-bloom-fade-in {
     animation: none;
   }
 }

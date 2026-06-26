@@ -32,6 +32,7 @@ export const DICT = {
         yourPassion: "Your passion",
         learnLabel: "Start learning",
         opportunitiesLabel: "Opportunities near you",
+        opportunitiesMatched: "{count} opportunities matched to your passion",
         backHome: "Start over",
         noOpportunities:
             "We don't have specific opportunities listed yet — explore the learning topics and check back soon.",
@@ -39,6 +40,12 @@ export const DICT = {
         pathLoading: "Shaping your path…",
         pathError:
             "Bloom couldn't shape your path just now. Please go back and try again.",
+        // Reflection screen
+        reflectionLabel: "Here's what I'm hearing",
+        reflectionLoading: "Bloom is reflecting…",
+        reflectionError:
+            "Bloom lost the words for a moment. Tap continue to see your path.",
+        continueBtn: "Continue",
     },
     sw: {
         tagline: "Gundua unachopenda",
@@ -55,12 +62,18 @@ export const DICT = {
         yourPassion: "Shauku yako",
         learnLabel: "Anza kujifunza",
         opportunitiesLabel: "Fursa karibu nawe",
+        opportunitiesMatched: "Fursa {count} zinazolingana na shauku yako",
         backHome: "Anza upya",
         noOpportunities:
             "Hatuna fursa mahususi bado — angalia mada za kujifunza na urudi tena hivi karibuni.",
         visitSite: "Tembelea",
         pathLoading: "Tunaandaa njia yako…",
         pathError: "Bloom hakuweza kuandaa njia sasa hivi. Tafadhali jaribu tena.",
+        reflectionLabel: "Hivi ndivyo ninavyosikia",
+        reflectionLoading: "Bloom anatafakari…",
+        reflectionError:
+            "Bloom amekosa maneno kwa muda. Gusa endelea kuona njia yako.",
+        continueBtn: "Endelea",
     },
     bem: {
         tagline: "Sanga ico utemwa",
@@ -77,12 +90,18 @@ export const DICT = {
         yourPassion: "Icikutemwa",
         learnLabel: "Tendeka ukusambilila",
         opportunitiesLabel: "Inshila shapepi nobe",
+        opportunitiesMatched: "Inshila {count} shalingana ne cikutemwa cobe",
         backHome: "Tampaibili",
         noOpportunities:
             "Tatwakwete inshila shaibela nomba — mona ifyakusambilila kabili wisepo nakabili.",
         visitSite: "Endela",
         pathLoading: "Tulepekanya inshila yobe…",
         pathError: "Bloom tapakapekanye inshila nomba. Mwesha nakabili.",
+        reflectionLabel: "Ifi ndeumfwa",
+        reflectionLoading: "Bloom aletontonkanya…",
+        reflectionError:
+            "Bloom nafilwa amashiwi panomba. Kanya pa konkanyapo umone inshila yobe.",
+        continueBtn: "Konkanyapo",
     },
     fr: {
         tagline: "Découvre ce que tu aimes",
@@ -99,6 +118,7 @@ export const DICT = {
         yourPassion: "Ta passion",
         learnLabel: "Commence à apprendre",
         opportunitiesLabel: "Opportunités près de toi",
+        opportunitiesMatched: "{count} opportunités correspondant à ta passion",
         backHome: "Recommencer",
         noOpportunities:
             "Pas encore d'opportunités spécifiques — explore les sujets d'apprentissage et reviens bientôt.",
@@ -106,6 +126,11 @@ export const DICT = {
         pathLoading: "Bloom prépare ton chemin…",
         pathError:
             "Bloom n'a pas pu préparer ton chemin. Reviens en arrière et réessaie.",
+        reflectionLabel: "Voici ce que j'entends",
+        reflectionLoading: "Bloom réfléchit…",
+        reflectionError:
+            "Bloom a perdu les mots un instant. Touche continuer pour voir ton chemin.",
+        continueBtn: "Continuer",
     },
 } as const satisfies Record<LangCode, Record<string, string>>;
 
