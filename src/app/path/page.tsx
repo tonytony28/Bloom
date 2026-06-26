@@ -10,6 +10,7 @@ import {
   type PassionCategory,
   type Region,
 } from "@/src/lib/types";
+import { ShareActions } from "./ShareActions";
 
 type SearchParams = Record<string, string | string[] | undefined>;
 
@@ -162,6 +163,8 @@ export default async function PathPage({ searchParams }: PathPageProps) {
             </ul>
           )}
         </section>
+
+        <ShareActions lang={lang} passion={passion} summary={summary} />
 
         <Link
           href="/"

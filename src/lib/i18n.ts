@@ -5,7 +5,7 @@ export const LANGUAGES = [
     { code: "en", label: "English", bcp47: "en-US" },
     { code: "sw", label: "Kiswahili", bcp47: "sw-KE" },
     { code: "bem", label: "Bemba", bcp47: "bem-ZM" },
-    { code: "fr", label: "Français", bcp47: "fr-FR" },
+    { code: "fr", label: "French", bcp47: "fr-FR" },
 ] as const;
 
 export type LangCode = (typeof LANGUAGES)[number]["code"];
@@ -39,6 +39,16 @@ export const DICT = {
         pathLoading: "Shaping your path…",
         pathError:
             "Bloom couldn't shape your path just now. Please go back and try again.",
+        voiceTip: "Tip: tap the microphone — Bloom can hear you.",
+        speakOn: "Bloom speaks",
+        speakOff: "Muted",
+        listenAgain: "Listen again",
+        offlineBadge: "Offline — your chat is saved on this device",
+        shareBtn: "Share my Bloom",
+        shareCopied: "Copied!",
+        whatsappBtn: "Share on WhatsApp",
+        shareMessage: "I discovered my passion is {passion} with Bloom 🌸 — try it:",
+        startOver: "Start over",
     },
     sw: {
         tagline: "Gundua unachopenda",
@@ -61,6 +71,16 @@ export const DICT = {
         visitSite: "Tembelea",
         pathLoading: "Tunaandaa njia yako…",
         pathError: "Bloom hakuweza kuandaa njia sasa hivi. Tafadhali jaribu tena.",
+        voiceTip: "Kidokezo: gusa kipaza sauti — Bloom anaweza kukusikia.",
+        speakOn: "Bloom anasema",
+        speakOff: "Imenyamazishwa",
+        listenAgain: "Sikiliza tena",
+        offlineBadge: "Hauko mtandaoni — mazungumzo yamehifadhiwa",
+        shareBtn: "Shiriki Bloom yangu",
+        shareCopied: "Imenakiliwa!",
+        whatsappBtn: "Shiriki kwenye WhatsApp",
+        shareMessage: "Nimegundua kuwa shauku yangu ni {passion} kwa Bloom 🌸 — jaribu:",
+        startOver: "Anza upya",
     },
     bem: {
         tagline: "Sanga ico utemwa",
@@ -83,6 +103,16 @@ export const DICT = {
         visitSite: "Endela",
         pathLoading: "Tulepekanya inshila yobe…",
         pathError: "Bloom tapakapekanye inshila nomba. Mwesha nakabili.",
+        voiceTip: "Ukucetekela: kanya pa maiki — Bloom angakumfwa.",
+        speakOn: "Bloom alanda",
+        speakOff: "Cipompo",
+        listenAgain: "Umfwa nakabili",
+        offlineBadge: "Tapali intaneti — amashiwi yenu nayasungwa",
+        shareBtn: "Shimika Bloom wandi",
+        shareCopied: "Cakopwa!",
+        whatsappBtn: "Shimika pa WhatsApp",
+        shareMessage: "Nasangile ukuti icikuntemwa cine ni {passion} pali Bloom 🌸 — eshe:",
+        startOver: "Tampaibili",
     },
     fr: {
         tagline: "Découvre ce que tu aimes",
@@ -106,6 +136,16 @@ export const DICT = {
         pathLoading: "Bloom prépare ton chemin…",
         pathError:
             "Bloom n'a pas pu préparer ton chemin. Reviens en arrière et réessaie.",
+        voiceTip: "Astuce : touche le micro — Bloom peut t'entendre.",
+        speakOn: "Bloom parle",
+        speakOff: "Muet",
+        listenAgain: "Réécouter",
+        offlineBadge: "Hors ligne — ta conversation est sauvegardée",
+        shareBtn: "Partager mon Bloom",
+        shareCopied: "Copié !",
+        whatsappBtn: "Partager sur WhatsApp",
+        shareMessage: "J'ai découvert que ma passion est {passion} avec Bloom 🌸 — essaie :",
+        startOver: "Recommencer",
     },
 } as const satisfies Record<LangCode, Record<string, string>>;
 

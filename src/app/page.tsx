@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { LANGUAGES, t } from "@/src/lib/i18n";
 import { useLang } from "@/src/lib/use-lang";
+import { clearBloomChat } from "@/src/lib/chat-storage";
 
 // Static positions so SSR and client agree (no Math.random in render).
 const PETALS = [
@@ -61,11 +62,16 @@ export default function Welcome() {
               <button
                 key={item.code}
                 type="button"
-                onClick={() => setLang(item.code)}
+                onClick={() => {
+                  // Switching language invalidates any half-finished
+                  // conversation (different prompt, different greeting).
+                  if (item.code !== lang) clearBloomChat();
+                  setLang(item.code);
+                }}
                 aria-pressed={active}
                 className={`rounded-2xl border px-4 py-3 text-sm font-medium transition ${active
-                    ? "border-pink-400 bg-pink-500 text-white shadow-sm"
-                    : "border-white/80 bg-white/70 text-zinc-700 hover:border-pink-200 hover:bg-white"
+                  ? "border-pink-400 bg-pink-500 text-white shadow-sm"
+                  : "border-white/80 bg-white/70 text-zinc-700 hover:border-pink-200 hover:bg-white"
                   }`}
               >
                 {item.label}
@@ -76,11 +82,19 @@ export default function Welcome() {
 
         <button
           type="button"
-          onClick={() => router.push("/discover")}
+          onClick={() => {
+            // "Begin" should always mean begin — don't resume a stale chat.
+            clearBloomChat();
+            router.push("/discover");
+          }}
           className="mt-10 w-full rounded-full bg-zinc-900 px-6 py-4 text-base font-semibold text-white shadow-lg transition hover:bg-zinc-800 active:scale-[0.98]"
         >
           {t(lang, "begin")}
         </button>
+        <p className="mt-4 flex items-center justify-center gap-2 text-xs text-zinc-500">
+          <span aria-hidden>🎙️</span>
+          {t(lang, "voiceTip")}
+        </p>
       </main>
     </div>
   );

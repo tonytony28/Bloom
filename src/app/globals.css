@@ -68,10 +68,36 @@ body {
   animation: bloom-pulse 3s ease-in-out infinite;
 }
 
+/* Cycles the placeholder/loading emoji through three growth stages.
+   The element keeps its layout box; we just swap content via a CSS
+   counter-style trick: stages live in the keyframe `content` of a
+   pseudo-element, controlled by `--bloom-stage` via inline `data-*`.
+   Simpler: use scale + opacity on a single emoji that the React
+   component renders, so it gently grows and fades. */
+@keyframes bloom-grow {
+
+  0%,
+  100% {
+    transform: scale(0.85);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+.animate-bloom-grow {
+  display: inline-block;
+  animation: bloom-grow 1.4s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
 
   .animate-bloom-fall,
-  .animate-bloom-pulse {
+  .animate-bloom-pulse,
+  .animate-bloom-grow {
     animation: none;
   }
 }
