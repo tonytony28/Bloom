@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌸 Bloom
 
-## Getting Started
+**A warm, voice-first companion that helps women in Sub-Saharan Africa
+discover their passion — and turn it into a real learning path and local
+opportunities.**
 
-First, run the development server:
+Bloom is built for low-literacy, low-bandwidth, mobile-first users. You can
+talk to it in your language (English, Kiswahili, Bemba, or French), and
+Bloom talks back. After a short conversation, it surfaces concrete next
+steps: things to learn and organizations near you that can help.
+
+## How it works
+
+1. **Talk to Bloom.** Tap the mic and answer one gentle question at a time.
+   Bloom (powered by Claude Haiku) listens for what lights you up.
+2. **Hear your passion.** After 3–5 exchanges, Bloom names what you love
+   and shows it back to you.
+3. **Walk the path.** Bloom generates 3 personalized learning topics in
+   your language and lists real opportunities in your region.
+
+## Tech
+
+- **Next.js 16** App Router + React 19 + Tailwind 4
+- **Anthropic Claude Haiku 4.5** — multilingual, low-latency chat
+- **Groq Whisper-large-v3** — free, fast voice transcription (OpenAI-compatible API)
+- **Web Speech API (`speechSynthesis`)** — Bloom speaks her replies back
+- **`MediaRecorder` + `AnalyserNode`** — voice capture with a live waveform
+
+## Run locally
 
 ```bash
+npm install
+# Create .env.local with the two keys below
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Required environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create `.env.local` in the project root:
 
-## Learn More
+```env
+ANTHROPIC_API_KEY=...    # console.anthropic.com
+GROQ_API_KEY=...         # console.groq.com/keys (free tier)
+```
 
-To learn more about Next.js, take a look at the following resources:
+| Var | Where to get it |
+| --- | --- |
+| `ANTHROPIC_API_KEY` | [console.anthropic.com](https://console.anthropic.com/) |
+| `GROQ_API_KEY` | [console.groq.com/keys](https://console.groq.com/keys) (free tier) |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## What's deliberate
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Voice-first**, because typing is a barrier for many target users.
+- **Mobile-shaped layout** — every screen is designed for a phone.
+- **Offline-friendly** — the conversation persists in `localStorage` and an
+  offline banner appears when the network drops.
+- **Share by WhatsApp** — the dominant comms platform in SSA. Discoveries
+  flow naturally into existing social networks.
+- **No build-time secrets exposed to the client.** All AI calls go through
+  Next.js API routes.
 
-## Deploy on Vercel
+## Folder layout
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+  app/
+    page.tsx                 # Welcome + language picker
+    discover/                # Voice chat with Bloom
+    path/                    # Personalized passion + learning path
+    api/
+      chat/route.ts          # Claude Haiku chat
+      transcribe/route.ts    # Groq Whisper transcription
+  lib/
+    claude.ts                # Claude client + prompts
+    i18n.ts                  # Languages + dictionary
+    use-lang.ts              # Language preference hook
+    opportunities.ts         # Curated regional opportunities
+```

@@ -68,6 +68,26 @@ body {
   animation: bloom-pulse 3s ease-in-out infinite;
 }
 
+/* Growing flower loading state */
+@keyframes bloom-grow {
+
+  0%,
+  100% {
+    transform: scale(0.85);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+.animate-bloom-grow {
+  display: inline-block;
+  animation: bloom-grow 1.4s ease-in-out infinite;
+}
+
 /* Reflection screen entrance — a gentle breath */
 @keyframes bloom-fade-in {
   0% {
@@ -89,6 +109,7 @@ body {
 
   .animate-bloom-fall,
   .animate-bloom-pulse,
+  .animate-bloom-grow,
   .animate-bloom-fade-in {
     animation: none;
   }
